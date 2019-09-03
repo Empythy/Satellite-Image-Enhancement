@@ -24,18 +24,8 @@ def enhanceImage(img):
     #########################################################################
     # ADD YOUR CODE BELOW THIS LINE
 
-    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-    # print(lab.shape)
-    lab_planes = cv2.split(lab)
 
-    clahe = cv2.createCLAHE(clipLimit=1.7,tileGridSize=(12,14))
-    lab_planes[0] = clahe.apply(lab_planes[0])
-
-    lab = cv2.merge(lab_planes)
-    newImg = lab
-    bgr = cv2.cvtColor(newImg, cv2.COLOR_LAB2BGR)
-
-    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     im_pil = Image.fromarray(rgb)
 
     # contrast = ImageEnhance.Contrast(im_pil)
@@ -60,10 +50,22 @@ def enhanceImage(img):
 
     opencv_image=cv2.cvtColor(np_im, cv2.COLOR_RGB2BGR)
 
+
+    lab = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2LAB)
+    # print(lab.shape)
+    lab_planes = cv2.split(lab)
+
+    clahe = cv2.createCLAHE(clipLimit=1.7,tileGridSize=(12,14))
+    lab_planes[0] = clahe.apply(lab_planes[0])
+
+    lab = cv2.merge(lab_planes)
+    newImg = lab
+    bgr = cv2.cvtColor(newImg, cv2.COLOR_LAB2BGR)
+
     # opencv_image = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
 
     # opencv_image = cv2.blur(opencv_image,(5,5))
-    outputImg = opencv_image
+    outputImg = bgr
 
     # END OF YOUR CODE
     #########################################################################
