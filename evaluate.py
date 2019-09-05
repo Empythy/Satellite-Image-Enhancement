@@ -18,15 +18,15 @@ import imageEnhance as eh
 
 # Default parameters (the only code you can change)
 verbose = False
-# input_dir = 'input/input'
-# output_dir = 'output/output'
-# groundtruth_dir = 'groundtruth/gt'
-# numImages = 30
+input_dir = 'input/input'
+output_dir = 'output/output'
+groundtruth_dir = 'groundtruth/gt'
+numImages = 30
 
-input_dir = 'testset/input/input'
-output_dir = 'testset/output/output'
-groundtruth_dir = 'testset/groundtruth/gt'
-numImages = 15
+# input_dir = 'testset/input/input'
+# output_dir = 'testset/output/output'
+# groundtruth_dir = 'testset/groundtruth/gt'
+# numImages = 15
 
 def histogram_intersection(x, y):
     n = x.shape[0]

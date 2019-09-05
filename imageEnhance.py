@@ -1,8 +1,6 @@
 """
 imageEnhance.py
-
 YOUR WORKING FUNCTION
-
 """
 import numpy as np
 import cv2
@@ -54,7 +52,8 @@ def enhanceImage(img):
     # print(lab.shape)
     lab_planes = cv2.split(lab)
 
-    clahe = cv2.createCLAHE(clipLimit=1.7,tileGridSize=(12,14))
+    clahe = cv2.createCLAHE(clipLimit=2.5,tileGridSize=(12,14))
+    lab_planes[0] = clahe.apply(lab_planes[0])
     lab_planes[0] = clahe.apply(lab_planes[0])
 
     lab = cv2.merge(lab_planes)
@@ -67,7 +66,7 @@ def enhanceImage(img):
     hsv = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2HSV)
     # print(lab.shape)
     hsv_planes = cv2.split(hsv)
-    clahe = cv2.createCLAHE(clipLimit=2,tileGridSize=(8,8))
+    clahe = cv2.createCLAHE(clipLimit=2,tileGridSize=(7,7))
     hsv_planes[2] = clahe.apply(hsv_planes[2])
     hsv = cv2.merge(hsv_planes)
     newImg = hsv
