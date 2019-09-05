@@ -38,7 +38,7 @@ def enhanceImage(img):
     after_sharp = sharpening.enhance(1.92)
 
     coloring = ImageEnhance.Color(after_sharp)
-    after_color = coloring.enhance(2.5)
+    after_color = coloring.enhance(2.0)
 
     contrast = ImageEnhance.Contrast(after_color)
     after_contrast = contrast.enhance(1)
@@ -50,7 +50,6 @@ def enhanceImage(img):
 
     opencv_image=cv2.cvtColor(np_im, cv2.COLOR_RGB2BGR)
 
-
     lab = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2LAB)
     # print(lab.shape)
     lab_planes = cv2.split(lab)
@@ -60,11 +59,22 @@ def enhanceImage(img):
 
     lab = cv2.merge(lab_planes)
     newImg = lab
+
     bgr = cv2.cvtColor(newImg, cv2.COLOR_LAB2BGR)
 
-    # opencv_image = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    # opencv_image = cv2.blur(bgr,(3,3))
 
-    # opencv_image = cv2.blur(opencv_image,(5,5))
+    hsv = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2HSV)
+    # print(lab.shape)
+    hsv_planes = cv2.split(hsv)
+    clahe = cv2.createCLAHE(clipLimit=2,tileGridSize=(8,8))
+    hsv_planes[2] = clahe.apply(hsv_planes[2])
+    hsv = cv2.merge(hsv_planes)
+    newImg = hsv
+
+    bgr = cv2.cvtColor(newImg, cv2.COLOR_HSV2BGR)
+
+
     outputImg = bgr
 
     # END OF YOUR CODE
