@@ -4,7 +4,7 @@ YOUR WORKING FUNCTION
 """
 import numpy as np
 import cv2
-from PIL import ImageEnhance
+from PIL import ImageEnhance,ImageFilter
 from PIL import Image
 
 input_dir = 'input/input'
@@ -22,7 +22,7 @@ def enhanceImage(img):
     #########################################################################
     # ADD YOUR CODE BELOW THIS LINE
 
-
+    img = cv2.GaussianBlur(img, (3,1),0)  
 
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     im_pil = Image.fromarray(rgb)
@@ -54,7 +54,6 @@ def enhanceImage(img):
     lab_planes = cv2.split(lab)
 
     clahe = cv2.createCLAHE(clipLimit=2.5,tileGridSize=(12,14))
-    lab_planes[0] = clahe.apply(lab_planes[0])
     lab_planes[0] = clahe.apply(lab_planes[0])
 
     lab = cv2.merge(lab_planes)
