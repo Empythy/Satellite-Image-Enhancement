@@ -79,7 +79,11 @@ def enhanceImage(img):
 
     darken = ImageEnhance.Brightness(im_pil)
     after_darken = darken.enhance(0.998)
-    np_im=np.array(after_darken)
+
+    sharpening = ImageEnhance.Sharpness(after_darken)
+    after_sharp = sharpening.enhance(1.003)
+
+    np_im=np.array(after_sharp)
 
     bgr=cv2.cvtColor(np_im, cv2.COLOR_RGB2BGR)
 
