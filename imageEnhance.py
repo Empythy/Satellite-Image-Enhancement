@@ -23,6 +23,7 @@ def enhanceImage(img):
     # ADD YOUR CODE BELOW THIS LINE
 
 
+
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     im_pil = Image.fromarray(rgb)
 
@@ -71,8 +72,16 @@ def enhanceImage(img):
     hsv = cv2.merge(hsv_planes)
     newImg = hsv
 
-    bgr = cv2.cvtColor(newImg, cv2.COLOR_HSV2BGR)
+    # bgr = cv2.cvtColor(newImg, cv2.COLOR_HSV2BGR)
+    rgb = cv2.cvtColor(newImg, cv2.COLOR_HSV2RGB)
 
+    im_pil = Image.fromarray(rgb)
+
+    darken = ImageEnhance.Brightness(im_pil)
+    after_darken = darken.enhance(0.998)
+    np_im=np.array(after_darken)
+
+    bgr=cv2.cvtColor(np_im, cv2.COLOR_RGB2BGR)
 
     outputImg = bgr
 
