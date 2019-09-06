@@ -81,7 +81,7 @@ def enhanceImage(img):
     after_darken = darken.enhance(0.998)
 
     sharpening = ImageEnhance.Sharpness(after_darken)
-    after_sharp = sharpening.enhance(1.003)
+    after_sharp = sharpening.enhance(1.3)
 
     np_im=np.array(after_sharp)
 
