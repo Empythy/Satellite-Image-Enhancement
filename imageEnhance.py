@@ -72,7 +72,6 @@ def enhanceImage(img):
     hsv = cv2.merge(hsv_planes)
     newImg = hsv
 
-    # bgr = cv2.cvtColor(newImg, cv2.COLOR_HSV2BGR)
     rgb = cv2.cvtColor(newImg, cv2.COLOR_HSV2RGB)
 
     im_pil = Image.fromarray(rgb)
