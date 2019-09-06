@@ -22,7 +22,7 @@ def enhanceImage(img):
     #########################################################################
     # ADD YOUR CODE BELOW THIS LINE
 
-    img = cv2.GaussianBlur(img, (3,1),0)  
+    img = cv2.GaussianBlur(img, (3,1),0)
 
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     im_pil = Image.fromarray(rgb)
@@ -39,10 +39,7 @@ def enhanceImage(img):
     coloring = ImageEnhance.Color(after_sharp)
     after_color = coloring.enhance(2.0)
 
-    contrast = ImageEnhance.Contrast(after_color)
-    after_contrast = contrast.enhance(1)
-
-    darken = ImageEnhance.Brightness(after_contrast)
+    darken = ImageEnhance.Brightness(after_color)
     after_darken = darken.enhance(0.998)
 
     np_im=np.array(after_darken)
